@@ -1,0 +1,12 @@
+{"properties": [
+  {
+    "name": "website.launching.date",
+    "type": "java.lang.String",
+    "description": "A description for 'website.launching.date'"
+  },
+  {
+    "name": "app.banner-folder",
+    "type": "java.lang.String",
+    "description": "A description for 'app.banner-folder'"
+  }
+]}
