@@ -14,7 +14,6 @@
 
 <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<!-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <!-- Favicon -->
@@ -103,7 +102,7 @@
 
 		<aside class="main-sidebar sidebar-dark-primary elevation-4">
 
-			<a href="index3.html" class="brand-link"> <img
+			<a href="home" class="brand-link"> <img
 				src="img/logowy.jpg" alt="Logo"
 				class="brand-image img-circle elevation-3" style="opacity: .8">
 				<span class="brand-text font-weight-light">Rajesh Physics</span>
@@ -121,17 +120,6 @@
 					</div>
 				</div>
 
-				<div class="form-inline">
-					<div class="input-group" data-widget="sidebar-search">
-						<input class="form-control form-control-sidebar" type="search"
-							placeholder="Search" aria-label="Search">
-						<div class="input-group-append">
-							<button class="btn btn-sidebar">
-								<i class="fas fa-search fa-fw"></i>
-							</button>
-						</div>
-					</div>
-				</div>
 
 				<nav class="mt-2">
 					<ul class="nav nav-pills nav-sidebar flex-column"
@@ -151,6 +139,13 @@
 								</a></li>
 								
 							</ul></li>
+							
+						<li class="nav-item"><a href="#"
+							class="nav-link"> <i class="nav-icon far fa-user"></i>
+								<p>
+									Profile 
+								</p>
+						</a></li>
 							
 						<li class="nav-item"><a href="#" class="nav-link"> <i
 								class="nav-icon fas fa-image"></i>
