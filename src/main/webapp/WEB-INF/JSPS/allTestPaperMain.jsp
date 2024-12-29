@@ -2,31 +2,31 @@
 
 <!-- Content Wrapper -->
 <div class="content-wrapper">
-    <!-- Content Header -->
-    <div class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1 class="m-0">All Test Papers</h1>
-                </div>
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">All Test Papers</li>
-                    </ol>
-                </div>
-            </div>
-        </div>
-    </div>
+	<!-- Content Header -->
+	<div class="content-header">
+		<div class="container-fluid">
+			<div class="row mb-2">
+				<div class="col-sm-6">
+					<h1 class="m-0">All Test Papers</h1>
+				</div>
+				<div class="col-sm-6">
+					<ol class="breadcrumb float-sm-right">
+						<li class="breadcrumb-item"><a href="#">Home</a></li>
+						<li class="breadcrumb-item active">All Test Papers</li>
+					</ol>
+				</div>
+			</div>
+		</div>
+	</div>
 
-    <!-- Main Content -->
-    <div class="content">
-        <div class="container-fluid">
-            <div class="row" id="testPaperContainer">
-                <!-- Test Paper rows will be dynamically inserted here -->
-            </div>
-        </div>
-    </div>
+	<!-- Main Content -->
+	<div class="content">
+		<div class="container-fluid">
+			<div class="row" id="testPaperContainer">
+				<!-- Test Paper rows will be dynamically inserted here -->
+			</div>
+		</div>
+	</div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
@@ -35,19 +35,16 @@
 <!-- Script for fetching and displaying test papers -->
 <script>
     $(document).ready(function() {
-        // Retrieve userInfo from localStorage
-         const userInfo = JSON.parse(localStorage.getItem("userInfo");
-        if (userInfoString) {
-           
-           
+        // Retrieve courseName from localStorage
+        const courseName = localStorage.getItem("course");
+        
+        if (courseName) {
             // Function to fetch test papers
             function fetchTestPapers() {
                 $.ajax({
-                    url: "${pageContext.request.contextPath}/api/quiz/getAll/"+userInfo.id,
+                    url: "${pageContext.request.contextPath}/api/quiz/getAll/actived",
                     method: "GET",
-                   /*  headers: {
-                        'Authorization': 'Bearer ' + userInfo.token // Assuming you have a token in userInfo for authentication
-                    }, */
+                    data: { courseName: courseName },
                     success: function(response) {
                         var testPaperContainer = $('#testPaperContainer');
                         testPaperContainer.empty();
@@ -65,7 +62,7 @@
                                                 "<p class='card-text'>" + testPaper.description + "</p>" +
                                                 "<div class='row'>" +
                                                     "<div class='col-6'>" +
-                                                        "<p class='card-text'><strong>Questions: </strong>" + testPaper.numberOfQuestions + "</p>" +
+                                                        "<p class='card-text'><strong>Questions: </strong>" + testPaper.numberOfQuestion + "</p>" +
                                                     "</div>" +
                                                     "<div class='col-6'>" +
                                                         "<p class='card-text'><strong>Max Marks: </strong>" + testPaper.maxMarks + "</p>" +
@@ -108,7 +105,7 @@
             Swal.fire({
                 icon: 'error',
                 title: 'Error',
-                text: 'User information not found. Please log in again.'
+                text: 'Course information not found. Please select a course.'
             });
         }
     });

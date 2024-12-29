@@ -74,8 +74,6 @@ public class User implements Serializable, UserDetails {
 	@Column(name="COURSE", nullable = true)
 	private String course;
 	
-	@Column(name="BATCH_CODE", nullable = true)
-	private String batchCode;
 
 	@Column(name = "ACCOUNT_EXPIRE_AT", nullable = false)
 	@JsonFormat(shape = Shape.STRING, pattern = "dd-MM-yyyy HH:mm:ss a")
@@ -95,11 +93,17 @@ public class User implements Serializable, UserDetails {
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinTable(name = "USER_ROLE_MAPPER", joinColumns = @JoinColumn(name = "USER_ID", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "ROLE_ID", referencedColumnName = "ID"))
 	private List<Role> roles = new ArrayList<>();
+	
 
 //	----------------map user to course --------------------------
 //	@ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 //	@JoinTable(name = "USER_COURSE_MAPPER", joinColumns = @JoinColumn(name = "User_ID", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "COURSE_ID", referencedColumnName = "ID"))
 //	private List<Course> courses = new ArrayList<>();
+
+	@ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@JoinTable(name = "USER_BATCH_MAPPER", joinColumns = @JoinColumn(name = "User_ID", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "BATCH_ID", referencedColumnName = "ID"))
+	private List<Batch> batches = new ArrayList<>();
+
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -224,17 +228,27 @@ public class User implements Serializable, UserDetails {
 	public void setRoles(List<Role> roles) {
 		this.roles = roles;
 	}
+	
+	
 
-//	public List<Course> getCourses() {
-//		return courses;
-//	}
-//
-//	public void setCourses(List<Course> courses) {
-//		this.courses = courses;
-//	}
+	public String getCourse() {
+		return course;
+	}
+
+	public void setCourse(String course) {
+		this.course = course;
+	}
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public List<Batch> getBatches() {
+		return batches;
+	}
+
+	public void setBatches(List<Batch> batches) {
+		this.batches = batches;
 	}
 
 	public void setPassword(String password) {
@@ -244,6 +258,8 @@ public class User implements Serializable, UserDetails {
 	public User() {
 		super();
 	}
+
+	
 	
 	
 }

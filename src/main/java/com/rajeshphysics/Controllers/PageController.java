@@ -118,4 +118,9 @@ public class PageController {
     	modelAndView.setViewName("allQuestionsMain");
     	return modelAndView;
     }
+    @GetMapping("/all-test")
+    public ModelAndView openAllTPaestge(ModelAndView modelAndView) {
+    	modelAndView.setViewName("allTestPaperMain");
+    	return modelAndView;
+    }
 }

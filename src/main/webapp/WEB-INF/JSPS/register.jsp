@@ -133,7 +133,7 @@
                 console.log(response.data.content);
                 // Iterate through courses to build course options
                 courses.forEach(course => {
-                    courseOptions += "<option value='"+course.id+"'>"+course.name+" -- "+course.courseLanguage+"</option>";
+                    courseOptions += "<option value='"+course.name+"'>"+course.name+" -- "+course.courseLanguage+"</option>";
                 });
 
                 // Append the options to the course select dropdown
@@ -142,9 +142,9 @@
 
                 // Fetch batches based on selected course
                 $('#course').change(function() {
-                    let selectedCourseId = $(this).val();
-                    if (selectedCourseId) {
-                        const course = courses.find(c => c.id == selectedCourseId);
+                    let selectedCourse = $(this).val();
+                    if (selectedCourse) {
+                        const course = courses.find(c => c.name == selectedCourse);
                        
                         let batchOptions = '<option selected>-- Select Batch --</option>';
                         course.batches.forEach(batch => {
@@ -214,21 +214,23 @@
             swal("Info", "Passwords do not match!", "info");
             return;
         }
+        
+        
 
-        const registrationData = {
+         const registrationData = {
             fullName: fullName,
             address: address,
             mobile: mobile,
+            course : course,
             courseType: courseType,
-            batchCode: batch,
             password: password
         };
         
-     
+      
         
         // Submit registration data (assuming an API endpoint is available)
         $.ajax({
-            url: "${pageContext.request.contextPath}/api/ajax/registration?courseId="+course,
+            url: "${pageContext.request.contextPath}/api/ajax/registration?batchCode="+batch,
             method: "POST",
             contentType: "application/json",
             data: JSON.stringify(registrationData),
@@ -245,7 +247,7 @@
             error: function(jqXHR, textStatus, errorThrown) {
                 swal("Error", "Error registering. Please try again later.", "error");
             }
-        }); 
+        });  
     });
 
     function togglePassword(fieldId, iconId) {

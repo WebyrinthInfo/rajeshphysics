@@ -146,6 +146,13 @@
 									Profile 
 								</p>
 						</a></li>
+						
+						<li class="nav-item"><a href="all-test"
+							class="nav-link"> <i class="nav-icon far fa-envelope"></i>
+								<p>
+									Test 
+								</p>
+						</a></li>
 							
 						<li class="nav-item"><a href="#" class="nav-link"> <i
 								class="nav-icon fas fa-image"></i>

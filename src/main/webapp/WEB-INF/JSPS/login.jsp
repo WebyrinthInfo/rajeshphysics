@@ -86,6 +86,7 @@
                 	localStorage.setItem('userInfo', response.data);
                 	localStorage.setItem('jwtToken', response.data.jwtToken);
                 	localStorage.setItem('userName', response.data.fullName);
+                	localStorage.setItem('course', response.data.course);
                     window.location.href = 'dashboard';
                 } else {
                     swal('Error',response.msg, "error");

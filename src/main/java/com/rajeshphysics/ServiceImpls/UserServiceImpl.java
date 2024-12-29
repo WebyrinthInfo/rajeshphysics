@@ -15,10 +15,14 @@ import org.springframework.stereotype.Service;
 import com.rajeshphysics.Exceptions.ForbbidonExceptions;
 import com.rajeshphysics.Exceptions.ResourceAlreadyExistsException;
 import com.rajeshphysics.Exceptions.ResourceNotFoundException;
+import com.rajeshphysics.Models.Batch;
+import com.rajeshphysics.Models.Course;
 //import com.rajeshphysics.Models.Course;
 import com.rajeshphysics.Models.Role;
 import com.rajeshphysics.Models.User;
 import com.rajeshphysics.Payloads.PageableDataResponse;
+import com.rajeshphysics.Repositories.BatchRepository;
+import com.rajeshphysics.Repositories.CourseRepository;
 //import com.rajeshphysics.Repositories.CourseRepository;
 import com.rajeshphysics.Repositories.RoleRepository;
 import com.rajeshphysics.Repositories.UserRepository;
@@ -42,14 +46,17 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private RoleRepository roleRepo;
 	
-//	@Autowired
-//	private CourseRepository courseRepo;
+	@Autowired
+	private CourseRepository courseRepo;
+	
+	@Autowired
+	private BatchRepository batchRepo;
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
 	@Override
-	public User createUser(User user, Long roleId, Long courseId) {
+	public User createUser(User user, Long roleId, String batchCode) {
 		LocalDate currentDate = LocalDate.now();
 		LocalDate plusDays = currentDate.plusDays(3);
 		DateTimeFormatter  dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy");
@@ -71,6 +78,9 @@ public class UserServiceImpl implements UserService {
 //				Course courseInfo = courseRepo.findById(courseId).orElseThrow(()-> new ResourceNotFoundException("Course is not Found  : "+courseId));
 //				List<Course>  courses = new ArrayList<>(); 
 //				courses.add(courseInfo);
+				Batch batchInfo = batchRepo.findByBatchCode(batchCode.trim()).orElseThrow(()-> new ResourceNotFoundException("Batch is not Found  : "+batchCode));
+				List<Batch>  batches = new ArrayList<>(); 
+				batches.add(batchInfo);
 				
 				
 //				----------------------set user and access token -----------
@@ -80,6 +90,8 @@ public class UserServiceImpl implements UserService {
 				user.setStatus("ACTIVE");
 				user.setIsActive(1);
 				user.setAccountExpireAt(formatedDate);
+				user.setBatches(batches);
+//				user.setCourses(courses);
 //				String activationToken = null;
 //				if(role2.getName()=="STUDENT") {
 //					activationToken = commonUtils.generateActivationToken();

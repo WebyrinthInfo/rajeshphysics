@@ -2,14 +2,21 @@ package com.rajeshphysics.Models;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 
@@ -50,6 +57,10 @@ public class Banner implements Serializable {/**
 	@CreationTimestamp
 	@Column(name = "createdAt", nullable = false)
 	private LocalDateTime createdAt;
+	
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JsonIgnore
+	private List<User> users = new ArrayList<>();
 
 	public Long getId() {
 		return id;
@@ -125,6 +136,14 @@ public class Banner implements Serializable {/**
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public List<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(List<User> users) {
+		this.users = users;
 	}
 	
 	

@@ -197,23 +197,31 @@ public class QuizController {
 				
 			}
 			
-//			------------{ get All active Quizzes of Course }-------------------------
-			@GetMapping("/getAll/active/{id}")
-			public ResponseEntity<GenericResponse<List<Quiz>>> getActiveQuizzesOfCourse(@PathVariable ("courseId") Long courseId, GenericResponse<List<Quiz>> response) {
-				List<Quiz> quizzes = quizServe.getActiveQuizzesofCourse(courseId);
-					if(quizzes != null) {
-						response.setData(quizzes);
-						response.setStatus("SUCCESS");
-						response.setMsg("Data Fetched successfully!");
-						return new ResponseEntity<GenericResponse<List<Quiz>>>(response, HttpStatus.OK);
-					}else {
-						response.setData(quizzes);
-						response.setStatus("FAILURE");
-						response.setMsg("Something went wrong!");
-						return new ResponseEntity<GenericResponse<List<Quiz>>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
-					}
-				
+			// ------------{ Get All Active Quizzes of Course }-------------------------
+			@GetMapping("/getAll/actived")
+			public ResponseEntity<GenericResponse<List<Quiz>>> getActiveQuizzesOfCourse(@RequestParam("courseName") String courseName) {
+			    GenericResponse<List<Quiz>> response = new GenericResponse<>();
+
+			    try {
+			        List<Quiz> quizzes = quizServe.getActiveQuizzesofCourse(courseName);
+			        if (quizzes != null && !quizzes.isEmpty()) {
+			            response.setData(quizzes);
+			            response.setStatus("SUCCESS");
+			            response.setMsg("Data fetched successfully!");
+			            return new ResponseEntity<>(response, HttpStatus.OK);
+			        } else {
+			            response.setData(quizzes);
+			            response.setStatus("FAILURE");
+			            response.setMsg("No active quizzes found!");
+			            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+			        }
+			    } catch (Exception e) {
+			        response.setStatus("FAILURE");
+			        response.setMsg("Something went wrong!");
+			        return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+			    }
 			}
+
 			
 			
 //			------------------{ publish quiz by is active }-------------------------------

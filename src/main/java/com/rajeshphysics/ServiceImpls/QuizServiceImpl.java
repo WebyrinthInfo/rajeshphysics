@@ -79,10 +79,18 @@ public class QuizServiceImpl implements QuizService {
 
 
 	@Override
-	public List<Quiz> getActiveQuizzesofCourse(Long courseId) {
-		Course course = courseRepo.findById(courseId).orElseThrow(()-> new ResourceNotFoundException("Course is not found with :"+ courseId));
-		List<Quiz> findByCourseAndActive = quizRepo.findByCourseAndIsActive(course, 1);
-		return findByCourseAndActive;
+	public List<Quiz> getActiveQuizzesofCourse(String courseName) {
+	    // Convert courseId from Integer to Long
+//	    Long longCourseId = Long.valueOf(courseId);
+
+	    // Fetch the course by ID or throw a ResourceNotFoundException if not found
+	    Course course = courseRepo.findByName(courseName)
+	        .orElseThrow(() -> new ResourceNotFoundException("Course is not found with ID: " + courseName));
+
+	    // Fetch the list of active quizzes for the course
+	    List<Quiz> activeQuizzes = quizRepo.findByCourseAndIsActive(course, 1);
+
+	    return activeQuizzes;
 	}
 
 

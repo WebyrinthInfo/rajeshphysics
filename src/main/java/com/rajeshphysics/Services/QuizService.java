@@ -15,5 +15,5 @@ public interface QuizService {
 	public List<Quiz> getActiveQuizzes();
 	public Quiz publishQuiz(Long id, Long status);
 	public List<Quiz> getQuizzesOfCourse(Long courseId);
-	public List<Quiz> getActiveQuizzesofCourse(Long courseId);
+	public List<Quiz> getActiveQuizzesofCourse(String  courseName);
 }

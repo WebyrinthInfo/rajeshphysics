@@ -58,13 +58,13 @@ public class AjaxController {
     public ResponseEntity<GenericResponse<User>> createUserAndAssignRole(
             @RequestBody User user,
             @RequestParam(name = "roleId", defaultValue = AppConstrants.STUDENT_ROLE_ID, required = false) Long roleId,
-            @RequestParam(name = "courseId", required = true) Long courseId,
+            @RequestParam(name = "batchCode", required = true) String batchCode,
             GenericResponse<User> response) {
 
-        logger.info("Registration request received with roleId: {} and courseId: {} : {}", roleId, courseId, LocalDateTime.now());
+        logger.info("Registration request received with roleId: {} and batchCode: {} : {}", roleId, batchCode, LocalDateTime.now());
         User userInfo = null;
-        if (user != null && roleId != null && courseId != null) {
-            userInfo = userServe.createUser(user, roleId, courseId);
+        if (user != null && roleId != null && batchCode != null) {
+            userInfo = userServe.createUser(user, roleId, batchCode);
             if (userInfo != null) {
                 response.setData(userInfo);
                 response.setMsg("Registration Successfully");
