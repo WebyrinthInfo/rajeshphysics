@@ -65,7 +65,7 @@ public class BannerServiceImpl implements BannerService {
 	        	Banner banner = new Banner();
 	        	banner.setFileName(fileName);
 	        	banner.setIsActive(0);
-	        	banner.setLink(ServletUriComponentsBuilder.fromCurrentContextPath().path(bannerFolder+File.separator).path(fileName).toUriString());
+	        	banner.setLink(ServletUriComponentsBuilder.fromCurrentContextPath().path(File.separator+bannerFolder+File.separator).path(fileName).toUriString());
 	        	
 	        	banner.setOriginalName(file.getOriginalFilename());
 	        	banner.setSize(fileSize+" MB");

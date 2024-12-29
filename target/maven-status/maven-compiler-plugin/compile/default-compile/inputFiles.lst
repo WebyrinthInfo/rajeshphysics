@@ -1,4 +1,5 @@
 /opt/sts-workspace/rajeshphysics/src/main/java/com/rajeshphysics/Configs/AppConfig.java
+/opt/sts-workspace/rajeshphysics/src/main/java/com/rajeshphysics/Configs/WebConfig.java
 /opt/sts-workspace/rajeshphysics/src/main/java/com/rajeshphysics/Controllers/AjaxController.java
 /opt/sts-workspace/rajeshphysics/src/main/java/com/rajeshphysics/Controllers/BannerController.java
 /opt/sts-workspace/rajeshphysics/src/main/java/com/rajeshphysics/Controllers/BatchController.java
